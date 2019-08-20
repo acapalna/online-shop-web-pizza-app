@@ -15,7 +15,7 @@ window.Shop = {
             contentType: "application/json",
             data: JSON.stringify(body),
         }).done(function () {
-            window.location.replace("cart.html")
+            window.location.replace("order-list.html")
         });
     },
 
@@ -35,16 +35,17 @@ window.Shop = {
 
         return `<div class="col-md-3 col-sm-6">
                     <div class="single-shop-product">
+                         <div><a class="product-name" data-product_id="${product.id}" href="/canvas/menu/?add-to-cart=${product.id}">
                         <div class="product-upper">
+<!--                            <h2><a class="product-name" data-product_id="${product.id}" href="/canvas/menu/?add-to-cart=${product.id}"><img src="${product.imagePath}" alt=""></a></h2>-->
                             <img src="${product.imagePath}" alt="">
                         </div>
-                        <h2><a class="product-name" data-product_id="${product.id}" href="/canvas/menu/?add-to-cart=${product.id}">${product.name}</a></h2>
+                        <h2><a class="product-name" data-product_id="${product.id}" href="/canvas/menu/?add-to-cart=${product.id}">${product.name}</a></h2></a></div>
                         <div class="product-carousel-price">
-                            <ins>$${product.price}</ins> <del>$${product.price}</del>
-                        </div>  
-                        
+                            <ins>€${product.price}</ins> <del>€${product.salePrice}</del>
+                        </div>
                         <div class="product-option-shop">
-                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="${product.id}" rel="nofollow" href="/canvas/shop/?add-to-cart=${product.id}">Add to cart</a>
+                            <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="${product.id}" rel="nofollow" href="/canvas/shop/?add-to-cart=${product.id}">Add to order list</a>
                         </div>                       
                     </div>
                 </div>`
@@ -68,12 +69,7 @@ window.Shop = {
         });
     },
 
-
     openProductInDetailPage: function (productId){
-        // let body = {
-        //     pizzaId: productId,
-        // };
-
         $.ajax({
             url:API_URL + "/products/" + productId,
             method: "GET",

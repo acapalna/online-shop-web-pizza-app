@@ -44,7 +44,7 @@
                         <ul>
                             <li><a href="#"><i class="fa fa-user"></i> My Account</a></li>
                             <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
-                            <li><a href="cart.html"><i class="fa fa-user"></i> My Cart</a></li>
+                            <li><a href="order-list.html"><i class="fa fa-user"></i> My Cart</a></li>
                             <li><a href="checkout.html"><i class="fa fa-user"></i> Checkout</a></li>
                             <li><a href="#"><i class="fa fa-user"></i> Login</a></li>
                         </ul>
@@ -89,7 +89,7 @@
                 
                 <div class="col-sm-6">
                     <div class="shopping-item">
-                        <a href="cart.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
+                        <a href="order-list.html">Cart - <span class="cart-amunt">$800</span> <i class="fa fa-shopping-cart"></i> <span class="product-count">5</span></a>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
 <!--                        <li><a href="index.html">Home</a></li>-->
                         <li><a href="menu.html">Menu</a></li>
 <!--                        <li><a href="detail-page.html">Single product</a></li>-->
-                        <li class="active"><a href="cart.html">Cart</a></li>
+                        <li class="active"><a href="order-list.html">Order List</a></li>
                         <li><a href="checkout.html">Checkout</a></li>
                         <li><a href="#">Category</a></li>
                         <li><a href="#">Others</a></li>
@@ -128,7 +128,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="product-bit-title text-center">
-                        <h2>Shopping Cart</h2>
+                        <h2>Order List</h2>
                     </div>
                 </div>
             </div>
@@ -194,7 +194,7 @@
                 </div>
                 
                 <div class="col-md-8">
-                    <div class="product-content-right">
+                    <div class="product-content-right" id="cart-products-container">
                         <div class="woocommerce">
                             <form method="post" action="#">
                                 <table cellspacing="0" class="shop_table cart">
@@ -676,6 +676,6 @@
     
     <!-- Main Script -->
     <script src="js/main.js"></script>
-    <script src="js/cart.js"></script>
+    <script src="js/order-list.js"></script>
   </body>
 </html>

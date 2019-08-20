@@ -37,31 +37,20 @@ window.Detail_page = {
 						<div class="product-inner">
 							<h2 class="product-name">${product.name}</h2>
 							<div class="product-inner-price">
-								<ins>$${product.price}</ins> <del>$${product.salePrice}</del>
+								<ins>€${product.price}</ins> <del>€${product.salePrice}</del>
 							</div>
 
 							<form action="" class="cart">
-								<div class="quantity">
-									<input type="number" size="4" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1">
-								</div>
-								<button class="add_to_cart_button" type="submit">Add to cart</button>
+<!--								<button class="add_to_cart_button" type="submit">Add to cart</button>-->
+								<a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="${product.id}" rel="nofollow" href="/canvas/shop/?add-to-cart=${product.id}">Add to order list</a>
 							</form>
-
-							<div class="product-inner-category">
-								<p>Category: <a href="">Summer</a>. Tags: <a href="">awesome</a>, <a href="">best</a>, <a href="">sale</a>, <a href="">shoes</a>. </p>
-							</div>
-
 							<div role="tabpanel">
-								<ul class="product-tab" role="tablist">
-									<li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Description</a></li>
-									<li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Reviews</a></li>
-								</ul>
 								<div class="tab-content">
 									<div role="tabpanel" class="tab-pane fade in active" id="home">
 										<h2>Pizza Description</h2>
-										<p>${product.weight}</p>
-										<p>${product.ingredients}</p>
-										<p>${product.description}</p>
+										<p>Weight: ${product.weight} Kg</p>
+										<p>Ingredients: ${product.ingredients}</p>
+										<p>Description: ${product.description}</p>
 									</div>
 								</div>
 							</div>
