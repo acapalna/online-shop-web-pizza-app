@@ -11,20 +11,16 @@ window.Detail_page = {
             method: "GET"
         }).done(function(response) {
             console.log(response);
-            Detail_page.displayProduct(response)
+            Detail_page.displayProduct(response);
+            Detail_page.displayBreadcrumbs(response);
         });
     },
 
 
     getProductHtml:function(product){
 
-		return `<div class="product-breadcroumb">
-					<a href="">Online Pizza Store</a>
-					<a href="menu.html">Menu</a>
-					<a href="">${product.name}</a>
-				</div>
+		return `
 
-				<div class="row">
 					<div class="col-sm-6">
 						<div class="product-images">
 							<div class="product-main-img">
@@ -56,15 +52,116 @@ window.Detail_page = {
 							</div>
 						</div>
 					</div>
-				</div>`
+				`
+    },
+
+    displayBreadcrumbsHtml:function(name) {
+        return `<a href="">Online Pizza Store</a>
+				<a href="menu.html">Menu</a>
+				<a href="">${name}</a>`
     },
 
     displayProduct: function (product) {
         let productHtml = Detail_page.getProductHtml(product);
 
         //cssSelector
-        $('.product-content-right').html(productHtml);
+        $('#single-container').html(productHtml);
     },
-};
 
+    displayBreadcrumbs: function (product) {
+        let productHtml = Detail_page.displayBreadcrumbsHtml(product.name);
+
+        //cssSelector
+        $('#breadcrumbs').html(productHtml);
+    },
+
+    addProductToCart: function (productId){
+        let body = {
+            clientId: 7,
+            pizzaId: productId,
+        };
+
+        $.ajax({
+            url:API_URL + "/cart",
+            method: "PUT",
+            //MIME type
+            contentType: "application/json",
+            data: JSON.stringify(body),
+        }).done(function () {
+            window.location.replace("order-list.html")
+        });
+    },
+
+    bindEvents: function () {
+        $('#single-container').delegate(
+            '.add_to_cart_button', 'click', function (event) {
+                event.preventDefault();
+
+                let productId = $(this).data('product_id');
+                Detail_page.addProductToCart(productId)
+            });
+    },
+
+    getProducts:function(){
+        $.ajax({
+            url: API_URL + "/products",
+            method: "GET"
+        }).done(function(response) {
+            console.log(response);
+            Detail_page.displayProducts(response.content);
+            Detail_page.displayProductsMargin(response.content);
+        });
+    },
+
+    getProductsHtml:function(product){
+        return `
+                    <div class="single-product">
+                       <div class="product-f-image">
+                           <img src="${product.imagePath}" alt="">
+                           <div class="product-hover">
+                               <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
+                               <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
+                           </div>
+                       </div>
+                       <h2><a href="">${product.name}</a></h2>
+                       <div class="product-carousel-price">
+                           <ins>€${product.price}</ins> <del>€${product.salePrice}</del>
+                       </div> 
+                   </div>
+               `
+    },
+
+
+    displayProducts: function (products) {
+        let productsHtml = "";
+        products.forEach(item => productsHtml += Detail_page.getProductsHtml(item));
+
+        //cssSelector
+        $('.related-products-carousel').html(productsHtml);
+    },
+
+    displayOnMarginHtml:function(product) {
+        return `<div class="thubmnail-recent">
+                            <img src="${product.imagePath}" class="recent-thumb" alt="">
+                            <h2><a href="">${product.name}</a></h2>
+                            <div class="product-sidebar-price">
+                                <ins>$700.00</ins> <del>$100.00</del>
+                            </div>                             
+                        </div>`
+    },
+    displayProductsMargin: function (products) {
+        let productsHtml = "";
+        products.forEach(item => productsHtml += Detail_page.displayOnMarginHtml(item));
+        productsHtml = `<h2 class="sidebar-title">Products</h2>` + productsHtml;
+        //cssSelector
+        $('#sidebar-products').html(productsHtml);
+
+    }
+
+
+
+};
+Detail_page.getProducts();
 Detail_page.getProduct();
+
+Detail_page.bindEvents();

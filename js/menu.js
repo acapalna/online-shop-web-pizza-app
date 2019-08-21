@@ -35,7 +35,7 @@ window.Shop = {
 
         return `<div class="col-md-3 col-sm-6">
                     <div class="single-shop-product">
-                         <div><a class="product-name" data-product_id="${product.id}" href="/canvas/menu/?add-to-cart=${product.id}">
+                        <div><a class="product-name" data-product_id="${product.id}" href="/canvas/menu/?add-to-cart=${product.id}">
                         <div class="product-upper">
 <!--                            <h2><a class="product-name" data-product_id="${product.id}" href="/canvas/menu/?add-to-cart=${product.id}"><img src="${product.imagePath}" alt=""></a></h2>-->
                             <img src="${product.imagePath}" alt="">
@@ -73,9 +73,7 @@ window.Shop = {
         $.ajax({
             url:API_URL + "/products/" + productId,
             method: "GET",
-            //MIME type
-            // contentType: "application/json",
-            // data: JSON.stringify(body),
+
         }).done(function () {
             window.location.replace("detail-page.html?id="+ productId)
         });
