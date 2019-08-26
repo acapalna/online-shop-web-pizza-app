@@ -27,10 +27,13 @@ window.Cart = {
 
 
 
-    getProductHtml:function(product){
+    getProductHtml:function(product, index){
     return `<tr class="cart_item" id="${product.id}">
                 <td class="product-remove" id="pizza-remove">
-                    <a title="Remove this item" data-product_id="${product.id}" class="remove" href="#">×</a>
+                    <a title="Remove this item" data-product_id="${product.id}" class="remove" href="#"><h1>×</h1></a>
+                </td>
+                <td class="index">
+                    <div  title="index" data-product_id="${product.id}">${index}</div>
                 </td>
         
                 <td class="product-thumbnail">
@@ -41,22 +44,9 @@ window.Cart = {
                     <a class="product-name" data-product_id="${product.id}" href="/canvas/menu/?add-to-cart=${product.id}">${product.name}</a>
                 </td>
         
-                <td class="product-price">
-                    <span class="amount"data-price="${product.price}">€${product.price}</span>
-                </td>
-        
-                <td class="product-quantity">
-                    <div class="quantity buttons_added">
-                    <input type="button" class="minus" value="-">
-                    <input type="number" size="4" class="input-text qty text" title="Qty" value="1" min="0" step="1">
-                    <input type="button" class="plus" value="+">
-                    </div>
-                    </td>
-    
-                    <td class="product-subtotal">
-                    <span class="amount-total" data-price="${product.price}">€${product.price}</span>
-                </td>
-            </tr>`
+                 <td class="product-subtotal">
+                     <span class="amount"data-price="${product.price}">€${product.price}</span>
+                 </td>`
     },
 
     displayPriceHtml:function(price){
@@ -94,13 +84,16 @@ window.Cart = {
 
     displayProducts: function (products) {
         let productsHtml = "";
-        products.forEach(item => productsHtml += Cart.getProductHtml(item));
-
+        let index = 0;
+        let price = 0;
+        products.forEach(item =>
+        {
+            index = index +1;
+            productsHtml += Cart.getProductHtml(item, index);
+            price = price + item.price;
+        });
         //cssSelector
         $('.shop_table.cart tbody').html(productsHtml);
-
-        let price = 0;
-        products.forEach(item => price = price + item.price);
         $('#cart-total').html(Cart.displayPriceHtml(price));
     },
 
