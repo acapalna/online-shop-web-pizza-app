@@ -943,7 +943,7 @@ td.actions div.coupon {
 .cart_totals {
     float: right;
     margin-bottom: 50px;
-    width: 40%;
+    width: 100%;
 }
 .cart-collaterals h2 {
     color: #5a88ca;
