@@ -31,7 +31,6 @@ window.Cart = {
     return `<tr class="cart_item" id="${product.id}">
                 <td class="product-remove" id="pizza-remove">
                     <a title="Remove this item" data-product_id="${product.id}" class="remove" href="#">×</a>
-<!--                    <a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="${product.id}" rel="nofollow" href="/canvas/shop/?add-to-cart=${product.id}">Add to order list</a>-->
                 </td>
         
                 <td class="product-thumbnail">
@@ -40,11 +39,10 @@ window.Cart = {
         
                     <td class="product-name">
                     <a class="product-name" data-product_id="${product.id}" href="/canvas/menu/?add-to-cart=${product.id}">${product.name}</a>
-<!--                    <a href="single-product.html">${product.name}</a>-->
                 </td>
         
                 <td class="product-price">
-                    <span class="amount">€${product.price}</span>
+                    <span class="amount"data-price="${product.price}">€${product.price}</span>
                 </td>
         
                 <td class="product-quantity">
@@ -59,6 +57,29 @@ window.Cart = {
                     <span class="amount-total" data-price="${product.price}">€${product.price}</span>
                 </td>
             </tr>`
+    },
+
+    displayPriceHtml:function(price){
+        let total = price + 15;
+        return `
+                        <table cellspacing="0">
+                            <tbody>
+                            <tr class="cart-subtotal">
+                                <th>Subtotal</th>
+                                <td><span class="cart-subtotal">€${price}</span></td>
+                            </tr>
+
+                            <tr class="shipping">
+                                <th>Shipping and Handling</th>
+                                <td>€15.00</td>
+                            </tr>
+
+                            <tr class="order-total">
+                                <th>Order Total</th>
+                                <td><strong><span class="cart-total">€${total}</span></strong> </td>
+                            </tr>
+                            </tbody>
+                        </table>`
     },
 
     removeEvent: function () {
@@ -77,6 +98,10 @@ window.Cart = {
 
         //cssSelector
         $('.shop_table.cart tbody').html(productsHtml);
+
+        let price = 0;
+        products.forEach(item => price = price + item.price);
+        $('#cart-total').html(Cart.displayPriceHtml(price));
     },
 
     openProductInDetailPage: function (productId){
@@ -97,54 +122,10 @@ window.Cart = {
                 let productId = $(this).data('product_id');
                 Cart.openProductInDetailPage(productId)
             });
-    }
-
-    //
-    // displayPriceHtml:function (price) {
-    //     let totalPrice = price + 15;
-    //     return `<table cellspacing="0">
-    //                                 <tbody>
-    //                                     <tr class="cart-subtotal">
-    //                                         <th>Cart Subtotal</th>
-    //                                         <td><span class="cart-subtotal">€${price}</span></td>
-    //                                     </tr>
-    //
-    //                                     <tr class="shipping">
-    //                                         <th>Shipping and Handling</th>
-    //                                         <td>€15.00</td>
-    //                                     </tr>
-    //
-    //                                     <tr class="order-total">
-    //                                         <th>Order Total</th>
-    //                                         <td><strong><span class="cart-total">€${totalPrice}</span></strong> </td>
-    //                                     </tr>
-    //                                 </tbody>
-    //                             </table>`
-    // },
-    //
-    // displayTotalPrice:function(){
-    //     //let totalPrice = 0;
-    //     var total = 0;
-    //     var nodes = document.getElementsByClassName('amount-total');
-    //
-    //     [].forEach.call(nodes, function(node) {
-    //         console.log(node.dataset.price);
-    //         total += parseFloat(node.dataset.price)
-    //     });
-    //
-    //     // $('.amount-total').each(function () {
-    //     //     totalPrice += parseFloat($(this).data('price'));
-    //     // });
-    //
-    //     //$('.cart_totals').html(displayPriceHtml(totalPrice));
-    //     $('.cart_total').html(total);
-    // },
-
-
+    },
 
 };
 
 Cart.getCart();
 Cart.removeEvent();
 Cart.openDetail();
-//Cart.displayTotalPrice();
