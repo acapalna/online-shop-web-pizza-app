@@ -548,7 +548,7 @@ z-index: 999;}
 .footer-top-area .zigzag-bottom{background: #f4f4f4}
 .footer-top-area {background: none repeat scroll 0 0 #333;
 color: #999;
-padding: 35px 0 180px;}
+padding: 35px 0 40px;}
 
 
 .footer-bottom-area {background: #000;color: #fff}
@@ -685,13 +685,13 @@ width: 10px;
   font-size: 50px;
   font-weight: 200;
   margin: 0;
-  padding: 50px 0;color: #fff;
+  padding: 20px 0;color: #fff;
 }
 
 .single-product-area .zigzag-bottom {background-color: #f4f4f4}
 
 .single-product-area {
-  padding: 80px 0 130px;
+  padding: 40px 0 130px;
 }
 
 
@@ -724,7 +724,7 @@ input[type="submit"]:hover, button[type=submit]:hover {background-color: #222}
     width: 100%;
 }
 .thubmnail-recent {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     overflow: hidden;
 }
 .recent-thumb {
