@@ -40,7 +40,7 @@ window.Detail_page = {
 							<div class="tab-content">
 								<div role="tabpanel" class="tab-pane fade in active" id="home">
 									<h2>Pizza Description</h2>
-									<p>Weight: ${product.weight} Kg</p>
+									<p>Weight: ${product.weight} gr</p>
 									<p>Ingredients: ${product.ingredients}</p>
 									<p>Description: ${product.description}</p>
 								</div>
