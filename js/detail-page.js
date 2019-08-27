@@ -13,6 +13,7 @@ window.Detail_page = {
             console.log(response);
             Detail_page.displayProduct(response);
             Detail_page.displayBreadcrumbs(response);
+            Detail_page.displayTitle(response);
         });
     },
 
@@ -33,7 +34,6 @@ window.Detail_page = {
 							<ins>€${product.price}</ins> <del>€${product.salePrice}</del>
 						</div>
 						<form action="" class="cart">
-<!--								<button class="add_to_cart_button" type="submit">Add to cart</button>-->
 							<a class="add_to_cart_button" data-quantity="1" data-product_sku="" data-product_id="${product.id}" rel="nofollow" href="/canvas/shop/?add-to-cart=${product.id}">Add to order list</a>
 						</form>
 						<div role="tabpanel">
@@ -61,6 +61,10 @@ window.Detail_page = {
 
         //cssSelector
         $('#single-container').html(productHtml);
+    },
+
+    displayTitle: function(product) {
+        $('.product-bit-title').html(`<h2>${product.name}</h2>`);
     },
 
     displayBreadcrumbs: function (product) {
@@ -106,23 +110,6 @@ window.Detail_page = {
             Detail_page.displayProductsMargin(response.content);
         });
     },
-
-    // getProductsHtml:function(product){
-    //     return `<div class="single-product">
-    //                 <div class="product-f-image">
-    //                     <img src="${product.imagePath}" alt="">
-    //                     <div class="product-hover">
-    //                         <a href="" class="add-to-cart-link"><i class="fa fa-shopping-cart"></i> Add to cart</a>
-    //                         <a href="" class="view-details-link"><i class="fa fa-link"></i> See details</a>
-    //                     </div>
-    //                 </div>
-    //                 <h2><a href="">${product.name}</a></h2>
-    //                 <div class="product-carousel-price">
-    //                     <ins>€${product.price}</ins> <del>€${product.salePrice}</del>
-    //                 </div>
-    //             </div>`
-    // },
-
 
     displayOnMarginHtml:function(product) {
         return `<div class="thubmnail-recent">

@@ -25,8 +25,6 @@ window.Cart = {
         });
     },
 
-
-
     getProductHtml:function(product, index){
     return `<tr class="cart_item" id="${product.id}">
                 <td class="product-remove" id="pizza-remove">
